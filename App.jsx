@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css';
 import './App.css';
 import { AddToDo } from './components/AddToDo/AddToDo';
@@ -9,6 +9,17 @@ export function App() {
     { id: 1, text: 'Exemplo de Tarefa', completed: false },
     { id: 2, text: 'Aprender React', completed: false },
   ]);
+
+  useEffect(() => {
+    const savedTasks = localStorage.getItem('tasks');
+    if (savedTasks) {
+      setToDos(JSON.parse(savedTasks));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(toDos));
+  }, [toDos]);
 
   const addToDo = (text) => {
     const newToDo = {
