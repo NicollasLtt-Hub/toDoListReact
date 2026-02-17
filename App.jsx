@@ -19,11 +19,21 @@ export function App() {
     setToDos([...toDos, newToDo]);
   };
 
+  const deleteToDo = (id) => {
+    setToDos(toDos.filter((toDos) => toDos.id !== id));
+  };
+
+  const toggleTodo = (id) => {
+    setToDos(
+      toDos.map((toDo) => (toDo.id === id ? { ...toDo, completed: !toDo.completed } : toDo)),
+    );
+  };
+
   return (
     <div className='container'>
       <h1 className='app-title'>Lista de Tarefas</h1>
       <AddToDo onAddTodo={addToDo} />
-      <ToDoList toDos={toDos} />
+      <ToDoList toDos={toDos} onDeleteTodo={deleteToDo} onToggleTodo={toggleTodo} />
     </div>
   );
 }

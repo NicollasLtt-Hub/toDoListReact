@@ -7,11 +7,11 @@ export function ToDoItem({ todo, onToggle, onDelete }) {
         type='checkbox'
         className='todo-checkobox'
         checked={todo.completed}
-        onChange={() => onToggle()}
+        onChange={() => onToggle(todo.id)}
       />
       <span className='todo-text'>{todo.text}</span>
 
-      <button className='delete-btn' onClick={() => onDelete()}>
+      <button className='delete-btn' onClick={() => onDelete(todo.id)}>
         Remover
       </button>
     </div>
